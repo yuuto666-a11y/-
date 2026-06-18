@@ -1,0 +1,72 @@
+body{
+    margin:0;
+    background:#ddd;
+    font-family:sans-serif;
+}
+
+.toolbar{
+    padding:10px;
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.map-container{
+    position:relative;
+    width:1080px;
+}
+
+.map-image{
+    width:1080px;
+    display:block;
+    border:3px solid black;
+}
+
+.building{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    width:40px;      /* 横幅 */
+    height:40px;      /* 高さ */
+
+    font-size:16px;   /* 文字サイズ */
+    font-weight:bold; /* 太字 */
+
+    border:none;
+    border-radius:10px;
+
+    cursor:move;
+ background-color:purple;
+    color:white;
+
+}
+
+.container{
+    display:flex;
+}
+
+.map-area{
+    flex:3;
+}
+
+.info-panel{
+    flex:1;
+
+    background:white;
+
+    padding:20px;
+
+    border-left:2px solid #ccc;
+
+    min-height:100vh;
+}
+
+.building-photo{
+    width:100%;
+
+    max-width:300px;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+}
