@@ -217,12 +217,16 @@ function updateSearchList() {
 
     datalist.innerHTML = "";
 
-    buildings.forEach(building => {
+    Object.keys(BUILDING_INFO).forEach(code => {
 
         const option =
             document.createElement("option");
 
-        option.value = building.shortName;
+        const name =
+            BUILDING_INFO[code].fullName;
+
+        option.value =
+            code + " (" + name + ")";
 
         datalist.appendChild(option);
     });
@@ -235,8 +239,14 @@ searchInput.addEventListener("keydown", function(e){
 
     if(e.key !== "Enter") return;
 
-    const keyword =
+    let keyword =
         this.value.trim();
+
+    keyword =
+        keyword.split(" ")[0];
+
+    keyword =
+        keyword.split("(")[0];
 
     const building =
         buildings.find(
