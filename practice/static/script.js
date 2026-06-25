@@ -183,6 +183,8 @@ fetch("/static/buildings.json")
             item.y
         );
     });
+
+    updateSearchList();
 })
 .catch(error => {
 
@@ -206,4 +208,46 @@ popupOverlay.addEventListener("click", function (e) {
 
         popupOverlay.style.display = "none";
     }
+});
+
+function updateSearchList() {
+
+    const datalist =
+        document.getElementById("buildingList");
+
+    datalist.innerHTML = "";
+
+    buildings.forEach(building => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = building.shortName;
+
+        datalist.appendChild(option);
+    });
+}
+
+const searchInput =
+    document.getElementById("searchInput");
+
+searchInput.addEventListener("keydown", function(e){
+
+    if(e.key !== "Enter") return;
+
+    const keyword =
+        this.value.trim();
+
+    const building =
+        buildings.find(
+            b => b.shortName === keyword
+        );
+
+    if(!building){
+
+        alert("見つかりません");
+        return;
+    }
+
+    building.element.click();
 });
