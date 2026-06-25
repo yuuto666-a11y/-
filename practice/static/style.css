@@ -49,18 +49,6 @@ body{
     flex:3;
 }
 
-.info-panel{
-    flex:1;
-
-    background:white;
-
-    padding:20px;
-
-    border-left:2px solid #ccc;
-
-    min-height:100vh;
-}
-
 .building-photo{
     width:100%;
 
@@ -86,4 +74,112 @@ body{
     width: 300px;
     padding: 8px;
     font-size: 16px;
+}
+
+/* ==========================
+   ポップアップ
+========================== */
+
+.popup-overlay {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.5);
+
+    z-index: 9999;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-card {
+
+    position: relative;
+
+    background: white;
+
+    width: 90%;
+
+    max-width: 500px;
+
+    max-height: 80vh;
+
+    overflow-y: auto;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 28px;
+
+    cursor: pointer;
+}
+
+.building-photo {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    border-radius: 10px;
+
+    margin-bottom: 15px;
+}
+
+/* ==========================
+   スマホ対応
+========================== */
+
+@media (max-width: 768px) {
+
+    .map-container {
+
+        width: 100%;
+    }
+
+    .map-image {
+
+        width: 100%;
+    }
+
+    .building {
+
+        width: 35px;
+        height: 35px;
+
+        font-size: 14px;
+    }
+
+    #searchInput {
+
+        width: 90%;
+    }
+
+    .popup-card {
+
+        width: 95%;
+        max-height: 85vh;
+    }
 }
