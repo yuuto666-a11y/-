@@ -8,10 +8,13 @@
           href="{{ url_for('static', filename='style.css') }}">
 </head>
 <div class="search-bar">
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="建物コードを入力">
+   <input
+    type="text"
+    id="searchInput"
+    list="buildingList"
+    placeholder="建物コードを入力">
+
+<datalist id="buildingList"></datalist>
 </div>
 <body>
 
