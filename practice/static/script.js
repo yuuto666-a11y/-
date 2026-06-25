@@ -4,6 +4,12 @@ const map = document.getElementById("map");
 const saveBtn = document.getElementById("saveBtn");
 const loadFile = document.getElementById("loadFile");
 
+const popupOverlay =
+    document.getElementById("popup-overlay");
+
+const closePopup =
+    document.getElementById("close-popup");
+
 let buildings = [];
 
 const EDIT_MODE = false;
@@ -53,7 +59,9 @@ button.addEventListener("click", function (e) {
             .textContent = "情報未登録";
 
         document.getElementById("building-photo")
-            .src = "/static/noimage.png";
+            .src = "";
+
+        popupOverlay.style.display = "flex";
 
         return;
     }
@@ -66,8 +74,9 @@ button.addEventListener("click", function (e) {
 
     document.getElementById("building-photo")
         .src = "/static/" + info.photo;
-});
 
+    popupOverlay.style.display = "flex";
+});
 //////////////////////////////////////////////////
 // 編集モード時のみ
 //////////////////////////////////////////////////
@@ -179,4 +188,22 @@ fetch("/static/buildings.json")
 
     console.log("buildings.jsonが見つかりません");
 
+});
+
+//////////////////////////////////////////////////
+// ポップアップを閉じる
+//////////////////////////////////////////////////
+
+closePopup.addEventListener("click", function () {
+
+    popupOverlay.style.display = "none";
+
+});
+
+popupOverlay.addEventListener("click", function (e) {
+
+    if (e.target === popupOverlay) {
+
+        popupOverlay.style.display = "none";
+    }
 });
