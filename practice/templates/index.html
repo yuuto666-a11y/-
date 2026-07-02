@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>大学マップ</title>
@@ -7,53 +8,73 @@
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 </head>
-<div class="search-bar">
-   <input
-    type="text"
-    id="searchInput"
-    list="buildingList"
-    placeholder="建物コードを入力">
 
-<datalist id="buildingList"></datalist>
-</div>
 <body>
 
+    <!-- 検索バー -->
+    <div class="search-bar">
 
-<div class="container">
+        <input
+            type="text"
+            id="searchInput"
+            list="buildingList"
+            placeholder="建物コードを入力">
 
-       <!-- 左：地図 -->
-    <div class="map-area">
+        <datalist id="buildingList"></datalist>
 
-        <div class="map-container">
+    </div>
 
-            <img src="{{ url_for('static', filename='50ec53d80f442907.png') }}"
-                 id="map"
-                 class="map-image">
+    <div class="container">
+
+        <!-- 地図 -->
+        <div class="map-area">
+
+            <div class="map-container">
+
+                <img
+                    src="{{ url_for('static', filename='50ec53d80f442907.png') }}"
+                    id="map"
+                    class="map-image">
+
+            </div>
 
         </div>
 
     </div>
 
-    <!-- 右：情報 -->
-<!-- 右：情報 -->
-<div class="info-panel">
+    <!-- ==========================
+         建物情報ポップアップ
+    =========================== -->
 
-    <h2 id="building-name">
-        建物を選択してください
-    </h2>
+    <div id="popup-overlay" class="popup-overlay">
 
-    <img id="building-photo"
-         class="building-photo"
-         src="{{ url_for('static', filename='50ec53d80f442907.png') }}">
+        <div class="popup-card">
 
-    <p id="building-description">
-        建物の説明がここに表示されます
-    </p>
+            <button id="close-popup" class="close-btn">
+                ×
+            </button>
 
-</div>
+            <h2 id="building-name">
+                建物名
+            </h2>
 
-</div>
-<script src="{{ url_for('static', filename='buildingData.js') }}"></script>
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+            <img
+                id="building-photo"
+                class="building-photo"
+                src=""
+                alt="建物写真">
+
+            <p id="building-description">
+                建物説明
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='buildingData.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
+
+</html>
