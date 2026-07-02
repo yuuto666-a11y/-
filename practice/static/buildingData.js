@@ -84,9 +84,9 @@ const BUILDING_INFO = {
 },
 
 "バス": {
-    fullName: "",
+    fullName: "バス",
     description: "キャンパス内外の移動に利用されるバス乗降エリア。",
-    photo: ""
+    photo: "practice/static/btn_time01_241205_on.webp",""
 },
 
 "11": {
