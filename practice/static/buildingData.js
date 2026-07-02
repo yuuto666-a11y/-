@@ -86,7 +86,7 @@ const BUILDING_INFO = {
 "バス": {
     fullName: "バス",
     description: "キャンパス内外の移動に利用されるバス乗降エリア。",
-    photo: "ionn.png","kyoto.png","yamasina.png"
+    photo:[ "ionn.png","kyoto.png","yamasina.png"]
 },
 
 "11": {
