@@ -183,3 +183,19 @@ body{
         max-height: 85vh;
     }
 }
+
+.photo-slider{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
+
+.slide-btn{
+
+    font-size:30px;
+    cursor:pointer;
+    border:none;
+    background:none;
+}
