@@ -1,6 +1,18 @@
 const mapContainer = document.querySelector(".map-container");
 const map = document.getElementById("map");
 
+const photo =
+    document.getElementById("building-photo");
+
+const prevBtn =
+    document.getElementById("prev-photo");
+
+const nextBtn =
+    document.getElementById("next-photo");
+
+let currentPhotos = [];
+let currentIndex = 0;
+
 const saveBtn = document.getElementById("saveBtn");
 const loadFile = document.getElementById("loadFile");
 
@@ -72,8 +84,20 @@ button.addEventListener("click", function (e) {
     document.getElementById("building-description")
         .textContent = info.description;
 
-    document.getElementById("building-photo")
-        .src = "/static/" + info.photo;
+    if (info.photos) {
+
+    currentPhotos = info.photos;
+
+} else {
+
+    currentPhotos = [info.photo];
+
+}
+
+currentIndex = 0;
+
+photo.src =
+    "/static/" + currentPhotos[currentIndex];
 
     popupOverlay.style.display = "flex";
 });
@@ -260,4 +284,39 @@ searchInput.addEventListener("keydown", function(e){
     }
 
     building.element.click();
+});
+
+prevBtn.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    currentIndex--;
+
+    if(currentIndex < 0){
+
+        currentIndex =
+            currentPhotos.length - 1;
+
+    }
+
+    photo.src =
+        "/static/" + currentPhotos[currentIndex];
+
+});
+
+nextBtn.addEventListener("click", function(e){
+
+    e.stopPropagation();
+
+    currentIndex++;
+
+    if(currentIndex >= currentPhotos.length){
+
+        currentIndex = 0;
+
+    }
+
+    photo.src =
+        "/static/" + currentPhotos[currentIndex];
+
 });
