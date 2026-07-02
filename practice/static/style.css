@@ -26,8 +26,8 @@ body{
 .building{
     position:absolute;
     transform:translate(-50%,-50%);
-    width:40px;      /* 横幅 */
-    height:40px;      /* 高さ */
+    width:50px;      /* 横幅 */
+    height:50px;      /* 高さ */
 
     font-size:16px;   /* 文字サイズ */
     font-weight:bold; /* 太字 */
