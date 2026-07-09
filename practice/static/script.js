@@ -320,3 +320,44 @@ nextBtn.addEventListener("click", function(e){
         "/static/" + currentPhotos[currentIndex];
 
 });
+
+// =========================
+// GPSで現在地取得
+// =========================
+
+const userMarker = document.getElementById("userLocation");
+
+function updateUserLocation() {
+
+    if (!navigator.geolocation) {
+        alert("このブラウザでは位置情報が利用できません。");
+        return;
+    }
+
+    navigator.geolocation.watchPosition(
+        function(position) {
+
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            console.log("現在地:", lat, lng);
+
+            // ここは仮の位置（あとで本物に変える）
+            const x = 500;
+            const y = 400;
+
+            userMarker.style.left = x + "px";
+            userMarker.style.top = y + "px";
+            userMarker.style.display = "block";
+
+        },
+        function(error) {
+            alert("位置情報を取得できませんでした。");
+        },
+        {
+            enableHighAccuracy: true
+        }
+    );
+}
+
+updateUserLocation();
