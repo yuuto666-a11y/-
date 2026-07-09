@@ -201,14 +201,4 @@ body{
 
 
 
-#userLocation {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    background: red;
-    border-radius: 50%;
-    border: 3px solid white;
-    z-index: 999;
-    display: none;
-    transform: translate(-50%, -50%);
-}
+
