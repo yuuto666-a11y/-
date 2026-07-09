@@ -28,16 +28,19 @@ body{
     border:3px solid black;
 }
 
-.building{
-
-    position:absolute;
-    transform:
-        translate(-50%,-50%)
-        translateZ(30px);
-
-    box-shadow:0 8px 15px rgba(0,0,0,.4);
+.building{ 
+    position:absolute; transform:translate(-50%,-50%); width:40px; /* 横幅 */ 
+    height:40px; /* 高さ */ 
+    font-size:16px; /* 文字サイズ */ 
+    font-weight:bold; /* 太字 */ 
+    
+    border:none; 
+    border-radius:10px; 
+    
+    cursor:move; 
+    background-color:purple; 
+    color:white; 
 }
-
 .container{
     display:flex;
 }
