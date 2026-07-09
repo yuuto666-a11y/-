@@ -16,10 +16,6 @@ body{
     position:relative;
     width:1080px;
 
-    transform: perspective(1200px)
-               rotateX(55deg);
-
-    transform-style: preserve-3d;
 }
 
 .map-image{
@@ -28,19 +24,41 @@ body{
     border:3px solid black;
 }
 
-.building{ 
-    position:absolute; transform:translate(-50%,-50%); width:40px; /* 横幅 */ 
-    height:40px; /* 高さ */ 
-    font-size:16px; /* 文字サイズ */ 
-    font-weight:bold; /* 太字 */ 
-    
-    border:none; 
-    border-radius:10px; 
-    
-    cursor:move; 
-    background-color:purple; 
-    color:white; 
+.building{
+    position:absolute;
+    transform:translate(-50%,-50%);
+
+    width:40px;
+    height:40px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    border:none;
+    border-radius:6px;
+
+    background:#8e24aa;
+    color:white;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 0 #6a1b9a,
+        6px 12px 15px rgba(0,0,0,.35);
+
+    transition:.2s;
+}　
+
+.building:hover{
+
+    transform:translate(-50%,-55%);
+
+    box-shadow:
+        0 12px 0 #6a1b9a,
+        8px 18px 18px rgba(0,0,0,.45);
 }
+
+
 .container{
     display:flex;
 }
