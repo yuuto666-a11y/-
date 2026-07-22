@@ -186,6 +186,7 @@ body{
     margin-bottom: 15px;
 }
 
+
 /* ==========================
    スマホ対応
 ========================== */
@@ -235,6 +236,10 @@ body{
     padding:20px;
 
     animation:slideUp .3s ease;
+
+    .slide-btn{
+        display:none;
+    }
 }
 
     }
@@ -246,6 +251,14 @@ body{
     align-items:center;
     justify-content:center;
     gap:20px;
+}
+
+.slide-btn{ 
+    
+    font-size:30px; 
+    cursor:pointer; 
+    border:none; 
+    background:none; 
 }
 
 @keyframes slideUp{
