@@ -320,7 +320,7 @@ nextBtn.addEventListener("click", function(e){
         "/static/" + currentPhotos[currentIndex];
 
 });
-/*
+
 let startX = 0;
 
 photo.addEventListener("touchstart", function(e){
@@ -362,7 +362,6 @@ photo.addEventListener("touchend", function(e){
     }
 
 });
-*/
 
 
 function resizeCampusMap() {
