@@ -248,14 +248,6 @@ body{
     gap:20px;
 }
 
-.slide-btn{
-
-    font-size:30px;
-    cursor:pointer;
-    border:none;
-    background:none;
-}
-
 @keyframes slideUp{
 
     from{
