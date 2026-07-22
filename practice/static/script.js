@@ -321,6 +321,48 @@ nextBtn.addEventListener("click", function(e){
 
 });
 
+let startX = 0;
+
+photo.addEventListener("touchstart", function(e){
+
+    if(currentPhotos.length <= 1) return; // 写真1枚なら何もしない
+
+    startX = e.touches[0].clientX;
+
+});
+
+photo.addEventListener("touchend", function(e){
+
+    if(currentPhotos.length <= 1) return;
+
+    const endX = e.changedTouches[0].clientX;
+
+    // 左にスワイプ → 次の写真
+    if(startX - endX > 50){
+
+        currentIndex++;
+
+        if(currentIndex >= currentPhotos.length){
+            currentIndex = 0;
+        }
+
+        photo.src = "/static/" + currentPhotos[currentIndex];
+    }
+
+    // 右にスワイプ → 前の写真
+    else if(endX - startX > 50){
+
+        currentIndex--;
+
+        if(currentIndex < 0){
+            currentIndex = currentPhotos.length - 1;
+        }
+
+        photo.src = "/static/" + currentPhotos[currentIndex];
+    }
+
+});
+
 
 
 function resizeCampusMap() {
