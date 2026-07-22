@@ -143,6 +143,7 @@ body{
     max-width:none;
     background:white;
     overflow-y: auto;
+    font-size:25px;
 
     max-height:45vh;
 
