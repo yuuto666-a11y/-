@@ -134,26 +134,26 @@ body{
     z-index: 9999;
 
     justify-content: center;
-    align-items: flex-end;
+    align-items:center;
 }
 
 .popup-card{
+    position: relative;
 
-    width:100%;
-    max-width:none;
+    width:90%;
+    max-width:500px;
+
+    max-height:80vh;
+
+    overflow-y:auto;
+
     background:white;
-    overflow-y: auto;
-    font-size:25px;
 
-    max-height:45vh;
-
-    margin:0;
-
-    border-radius:20px 20px 0 0;
+    border-radius:15px;
 
     padding:20px;
 
-    animation:slideUp .3s ease;
+    font-size:25px;
 }
 
 
@@ -215,10 +215,28 @@ body{
         width: 100%;
     }
 
+    .popup-overlay{
+        allign-item:flex-end;
+
     .popup-card {
 
-        width: 95%;
-        max-height: 85vh;
+    width:100%;
+    max-width:none;
+    background:white;
+    overflow-y: auto;
+    font-size:25px;
+
+    max-height:45vh;
+
+    margin:0;
+
+    border-radius:20px 20px 0 0;
+
+    padding:20px;
+
+    animation:slideUp .3s ease;
+}
+
     }
 }
 
