@@ -217,6 +217,7 @@ body{
     }
 
     .popup-overlay{
+        justify-content:center;
         align-items:flex-end;
     }
 
