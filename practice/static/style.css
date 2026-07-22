@@ -2,25 +2,35 @@ html,
 body{
     margin:0;
     padding:0;
-    background:white;
+    width:100%;
+    background:#ddd;
     font-family:sans-serif;
+    overflow-x:hidden;
 }
 
 .toolbar{
-    width:1080px;
+    width:min(1080px, 100%);
     box-sizing:border-box;
+    margin:0 auto;
     padding:10px;
     background:white;
     position:sticky;
     top:0;
     z-index:1000;
-    margin:0 auto;
+}
+
+.map-wrapper{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
 }
 
 .map-container{
     position:relative;
     width:1080px;
-    margin:0 auto;
+    flex:0 0 1080px;
+    transform-origin:top center;
 }
 
 .map-image{
@@ -30,8 +40,6 @@ body{
     border:3px solid black;
     box-sizing:border-box;
 }
-
-
 .building{
     position:absolute;
     transform:translate(-50%,-50%);
