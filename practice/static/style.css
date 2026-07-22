@@ -239,10 +239,6 @@ body{
 
         animation:slideUp .3s ease;
     }
-    
-    .slide-btn{
-        display:none;
-    }
 }
 
 .photo-slider{
