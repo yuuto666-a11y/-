@@ -225,7 +225,7 @@ body{
 
         width:100%;
         max-width:none;
-        background:white;
+        background:red;
         overflow-y: auto;
         font-size:25px;
 
@@ -238,10 +238,6 @@ body{
         padding:20px;
 
         animation:slideUp .3s ease;
-    }
-
-    .slide-btn{
-        display:none;
     }
 }
 
