@@ -134,26 +134,25 @@ body{
     z-index: 9999;
 
     justify-content: center;
-    align-items:center;
+    align-items:flex-end;
 }
 
 .popup-card{
-    position: relative;
+    width:100%;
+        max-width:none;
+        background:white;
+        overflow-y: auto;
+        font-size:25px;
 
-    width:90%;
-    max-width:500px;
+        max-height:45vh;
 
-    max-height:80vh;
+        margin:0;
 
-    overflow-y:auto;
+        border-radius:20px 20px 0 0;
 
-    background:white;
+        padding:20px;
 
-    border-radius:15px;
-
-    padding:20px;
-
-    font-size:18px;
+        animation:slideUp .3s ease;
 }
 
 
@@ -217,7 +216,6 @@ body{
     }
 
     .popup-overlay{
-        justify-content:center;
         align-items:flex-end;
     }
 
@@ -226,7 +224,7 @@ body{
 
         width:100%;
         max-width:none;
-        background:red;
+        background:white;
         overflow-y: auto;
         font-size:25px;
 
