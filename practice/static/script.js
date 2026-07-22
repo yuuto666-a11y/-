@@ -321,3 +321,27 @@ nextBtn.addEventListener("click", function(e){
 
 });
 
+
+
+function resizeCampusMap() {
+    const baseWidth = 1080;
+
+    const mapArea = document.querySelector(".map-area");
+    const mapContainer = document.querySelector(".map-container");
+
+    if (!mapArea || !mapContainer) {
+        return;
+    }
+
+    const availableWidth = mapArea.clientWidth;
+    const scale = Math.min(availableWidth / baseWidth, 1);
+
+    mapContainer.style.transform = `scale(${scale})`;
+
+    // transformで縮小しても元の高さが残るため、高さを調整
+    mapArea.style.height =
+        `${mapContainer.offsetHeight * scale}px`;
+}
+
+window.addEventListener("load", resizeCampusMap);
+window.addEventListener("resize", resizeCampusMap);
