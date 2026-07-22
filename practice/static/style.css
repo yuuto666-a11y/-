@@ -1,10 +1,14 @@
 body{
     margin:0;
+    width:1080px;
+    min-width:1080px;
     background:#ddd;
     font-family:sans-serif;
 }
 
 .toolbar{
+    width:1080px;
+    box-sizing:border-box;
     padding:10px;
     background:white;
     position:sticky;
@@ -15,15 +19,15 @@ body{
 .map-container{
     position:relative;
     width:1080px;
-
 }
 
 .map-image{
     width:1080px;
+    height:auto;
     display:block;
     border:3px solid black;
+    box-sizing:border-box;
 }
-
 .building{
     position:absolute;
     transform:translate(-50%,-50%);
