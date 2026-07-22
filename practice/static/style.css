@@ -130,29 +130,25 @@ body{
     z-index: 9999;
 
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 
-.popup-card {
+.popup-card{
 
-    position: relative;
+    width:100%;
+    max-width:none;
 
-    background: white;
+    max-height:45vh;
 
-    width: 90%;
+    margin:0;
 
-    max-width: 500px;
+    border-radius:20px 20px 0 0;
 
-    max-height: 80vh;
+    padding:20px;
 
-    overflow-y: auto;
-
-    border-radius: 15px;
-
-    padding: 20px;
-
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    animation:slideUp .3s ease;
 }
+
 
 .close-btn {
 
@@ -174,9 +170,11 @@ body{
 
     width: 100%;
 
-    max-width: 100%;
+    max-width: 180%;
 
     border-radius: 10px;
+
+    object-fit:cover;
 
     margin-bottom: 15px;
 }
