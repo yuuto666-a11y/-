@@ -137,6 +137,8 @@ body{
 
     width:100%;
     max-width:none;
+    background:white;
+    overflow-y: auto;
 
     max-height:45vh;
 
