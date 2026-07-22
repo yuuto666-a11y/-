@@ -217,7 +217,9 @@ body{
     }
 
     .popup-overlay{
-        allign-item:flex-end;
+        allign-items:flex-end;
+    }
+
 
     .popup-card {
 
@@ -236,12 +238,10 @@ body{
     padding:20px;
 
     animation:slideUp .3s ease;
-
+    }
+    
     .slide-btn{
         display:none;
-    }
-}
-
     }
 }
 
