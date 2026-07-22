@@ -217,7 +217,7 @@ body{
     }
 
     .popup-overlay{
-        allign-items:flex-end;
+        align-items:flex-end;
     }
 
 
@@ -238,6 +238,10 @@ body{
         padding:20px;
 
         animation:slideUp .3s ease;
+    }
+
+    .slide-btn{
+        display:none;
     }
 }
 
