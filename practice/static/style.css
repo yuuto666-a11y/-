@@ -134,25 +134,26 @@ body{
     z-index: 9999;
 
     justify-content: center;
-    align-items:flex-end;
+    align-items:center;
 }
 
 .popup-card{
-    width:100%;
-        max-width:none;
-        background:white;
-        overflow-y: auto;
-        font-size:25px;
-
-        max-height:45vh;
-
-        margin:0;
-
-        border-radius:20px 20px 0 0;
-
-        padding:20px;
-
-        animation:slideUp .3s ease;
+    position:relative;
+    
+    width:90%; 
+    max-width:500px;
+    
+    max-height:80vh;
+    
+    overflow-y:auto; 
+    background:white;
+    
+    border-radius:15px;
+    
+    padding:20px;
+    
+    font-size:18px; 
+}
     
       .slide-btn{
         display:none;
@@ -194,7 +195,7 @@ body{
    スマホ対応
 ========================== */
 
-@media (max-width: 768px) {
+@media　(hover: none) and (pointer: coarse) {
 
     .map-container {
 
