@@ -132,7 +132,7 @@ const BUILDING_INFO = {
 },
 
 "18": {
-    fullName: "弓道場",
+    fullName: "弓道場（横にスライドできるよ！）",
     description: "弓道部が使用する公式規格の弓道施設。競技大会にも対応できる設備を備える。",
     photos: ["kyuudoujou.jpg","kyuudoujou2.jpg"]
 }
