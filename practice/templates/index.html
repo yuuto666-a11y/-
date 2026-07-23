@@ -31,10 +31,19 @@
 
             <div class="map-container">
 
-                <img
-                    src="{{ url_for('static', filename='campusmap2.png') }}"
-                    id="map"
-                    class="map-image">
+              <picture>
+    <!-- スマホ版 -->
+    <source
+        media="(max-width: 768px) and (orientation: portrait)"
+        srcset="{{ url_for('static', filename='campusmap-mobile.png') }}">
+
+    <!-- PC版 -->
+    <img
+        src="{{ url_for('static', filename='campusmap.jpg') }}"
+        id="map"
+        class="map-image"
+        alt="京都橘大学キャンパスマップ">
+</picture>
             </div>
 
         </div>
