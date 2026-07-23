@@ -32,99 +32,103 @@ const EDIT_MODE = false;
 
 function createBuilding(name, x, y) {
 
+    const button = document.createElement("button");
 
-const button = document.createElement("button");
+    button.className = "building";
+    button.textContent = name;
 
-button.className = "building";
-button.textContent = name;
+    // 検索選択時のピン色変更に使用
+    button.dataset.buildingName = name;
 
-button.style.left = x + "px";
-button.style.top = y + "px";
+    button.style.left = x + "px";
+    button.style.top = y + "px";
 
-mapContainer.appendChild(button);
+    mapContainer.appendChild(button);
 
-const building = {
-    shortName: name,
-    x: x,
-    y: y,
-    element: button
-};
+    const building = {
+        shortName: name,
+        x: x,
+        y: y,
+        element: button
+    };
 
-buildings.push(building);
+    buildings.push(building);
 
-//////////////////////////////////////////////////
-// ボタンクリックで情報表示
-//////////////////////////////////////////////////
+    //////////////////////////////////////////////////
+    // ボタンクリックで情報表示
+    //////////////////////////////////////////////////
 
-button.addEventListener("click", function (e) {
+    button.addEventListener("click", function (e) {
 
-    e.stopPropagation();
+        e.stopPropagation();
 
-    const info = BUILDING_INFO[building.shortName];
+        // クリックまたは検索されたピンだけ色を変更
+        highlightBuilding(building.shortName);
 
-    if (!info) {
+        const info = BUILDING_INFO[building.shortName];
+
+        if (!info) {
+
+            document.getElementById("building-name")
+                .textContent = building.shortName;
+
+            document.getElementById("building-description")
+                .textContent = "情報未登録";
+
+            document.getElementById("building-photo")
+                .src = "";
+
+            popupOverlay.style.display = "flex";
+
+            return;
+        }
 
         document.getElementById("building-name")
-            .textContent = building.shortName;
+            .textContent = info.fullName;
 
         document.getElementById("building-description")
-            .textContent = "情報未登録";
+            .textContent = info.description;
 
-        document.getElementById("building-photo")
-            .src = "";
+        if (info.photos) {
+
+            currentPhotos = info.photos;
+
+        } else {
+
+            currentPhotos = [info.photo];
+
+        }
+
+        currentIndex = 0;
+
+        photo.src =
+            "/static/" + currentPhotos[currentIndex];
 
         popupOverlay.style.display = "flex";
-
-        return;
-    }
-
-    document.getElementById("building-name")
-        .textContent = info.fullName;
-
-    document.getElementById("building-description")
-        .textContent = info.description;
-
-    if (info.photos) {
-
-    currentPhotos = info.photos;
-
-} else {
-
-    currentPhotos = [info.photo];
-
-}
-
-currentIndex = 0;
-
-photo.src =
-    "/static/" + currentPhotos[currentIndex];
-
-    popupOverlay.style.display = "flex";
-});
-//////////////////////////////////////////////////
-// 編集モード時のみ
-//////////////////////////////////////////////////
-
-if (EDIT_MODE) {
-
-    makeDraggable(building);
-
-    button.addEventListener("contextmenu", function (e) {
-
-        e.preventDefault();
-
-        if (confirm(name + " を削除しますか？")) {
-
-            button.remove();
-
-            buildings = buildings.filter(
-                b => b !== building
-            );
-        }
     });
-}
 
+    //////////////////////////////////////////////////
+    // 編集モード時のみ
+    //////////////////////////////////////////////////
 
+    if (EDIT_MODE) {
+
+        makeDraggable(building);
+
+        button.addEventListener("contextmenu", function (e) {
+
+            e.preventDefault();
+
+            if (confirm(name + " を削除しますか？")) {
+
+                button.remove();
+
+                buildings = buildings.filter(
+                    b => b !== building
+                );
+            }
+        });
+    }
 }
 
 //////////////////////////////////////////////////
@@ -133,38 +137,36 @@ if (EDIT_MODE) {
 
 function makeDraggable(building) {
 
+    let dragging = false;
 
-let dragging = false;
+    const btn = building.element;
 
-const btn = building.element;
+    btn.addEventListener("mousedown", function () {
 
-btn.addEventListener("mousedown", function () {
+        dragging = true;
+    });
 
-    dragging = true;
-});
+    document.addEventListener("mouseup", function () {
 
-document.addEventListener("mouseup", function () {
+        dragging = false;
+    });
 
-    dragging = false;
-});
+    document.addEventListener("mousemove", function (e) {
 
-document.addEventListener("mousemove", function (e) {
+        if (!dragging) return;
 
-    if (!dragging) return;
+        const rect =
+            mapContainer.getBoundingClientRect();
 
-    const rect =
-        mapContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+        btn.style.left = x + "px";
+        btn.style.top = y + "px";
 
-    btn.style.left = x + "px";
-    btn.style.top = y + "px";
-
-    building.x = Math.round(x);
-    building.y = Math.round(y);
-});
-
+        building.x = Math.round(x);
+        building.y = Math.round(y);
+    });
 }
 
 //////////////////////////////////////////////////
@@ -173,48 +175,44 @@ document.addEventListener("mousemove", function (e) {
 
 if (EDIT_MODE) {
 
+    map.addEventListener("click", function (e) {
 
-map.addEventListener("click", function (e) {
+        const name = prompt("建物名を入力");
 
-    const name = prompt("建物名を入力");
+        if (!name) return;
 
-    if (!name) return;
-
-    createBuilding(
-        name,
-        e.offsetX,
-        e.offsetY
-    );
-});
-
-
+        createBuilding(
+            name,
+            e.offsetX,
+            e.offsetY
+        );
+    });
 }
-
 
 //////////////////////////////////////////////////
 // 起動時自動読込
 //////////////////////////////////////////////////
 
 fetch("/static/buildings.json")
-.then(response => response.json())
-.then(data => {
+    .then(response => response.json())
+    .then(data => {
 
-    data.forEach(item => {
+        data.forEach(item => {
 
-        createBuilding(
-            item.name,
-            item.x,
-            item.y
-        );
+            createBuilding(
+                item.name,
+                item.x,
+                item.y
+            );
+        });
+
+        updateSearchList();
+    })
+    .catch(error => {
+
+        console.log("buildings.jsonが見つかりません");
+
     });
-
-    updateSearchList();
-})
-.catch(error => {
-
-    console.log("buildings.jsonが見つかりません");
-
-});
 
 //////////////////////////////////////////////////
 // ポップアップを閉じる
@@ -233,6 +231,10 @@ popupOverlay.addEventListener("click", function (e) {
         popupOverlay.style.display = "none";
     }
 });
+
+//////////////////////////////////////////////////
+// 検索候補を作成
+//////////////////////////////////////////////////
 
 function updateSearchList() {
 
@@ -256,15 +258,13 @@ function updateSearchList() {
     });
 }
 
-const searchInput =
-    document.getElementById("searchInput");
+//////////////////////////////////////////////////
+// 検索文字から建物コードを取り出す
+//////////////////////////////////////////////////
 
-searchInput.addEventListener("keydown", function(e){
+function getBuildingCode(value) {
 
-    if(e.key !== "Enter") return;
-
-    let keyword =
-        this.value.trim();
+    let keyword = value.trim();
 
     keyword =
         keyword.split(" ")[0];
@@ -272,12 +272,58 @@ searchInput.addEventListener("keydown", function(e){
     keyword =
         keyword.split("(")[0];
 
+    return keyword.trim();
+}
+
+//////////////////////////////////////////////////
+// 検索バー
+//////////////////////////////////////////////////
+
+const searchInput =
+    document.getElementById("searchInput");
+
+//////////////////////////////////////////////////
+// 検索候補を選んだ時点でピンの色を変更
+//////////////////////////////////////////////////
+
+searchInput.addEventListener("input", function () {
+
+    const keyword =
+        getBuildingCode(this.value);
+
     const building =
         buildings.find(
             b => b.shortName === keyword
         );
 
-    if(!building){
+    if (building) {
+
+        highlightBuilding(building.shortName);
+
+    } else {
+
+        // 入力途中や検索欄が空の場合は選択を解除
+        clearBuildingHighlight();
+    }
+});
+
+//////////////////////////////////////////////////
+// Enterを押したら建物情報を表示
+//////////////////////////////////////////////////
+
+searchInput.addEventListener("keydown", function (e) {
+
+    if (e.key !== "Enter") return;
+
+    const keyword =
+        getBuildingCode(this.value);
+
+    const building =
+        buildings.find(
+            b => b.shortName === keyword
+        );
+
+    if (!building) {
 
         alert("見つかりません");
         return;
@@ -286,17 +332,20 @@ searchInput.addEventListener("keydown", function(e){
     building.element.click();
 });
 
-prevBtn.addEventListener("click", function(e){
+//////////////////////////////////////////////////
+// 前の写真
+//////////////////////////////////////////////////
+
+prevBtn.addEventListener("click", function (e) {
 
     e.stopPropagation();
 
     currentIndex--;
 
-    if(currentIndex < 0){
+    if (currentIndex < 0) {
 
         currentIndex =
             currentPhotos.length - 1;
-
     }
 
     photo.src =
@@ -304,16 +353,19 @@ prevBtn.addEventListener("click", function(e){
 
 });
 
-nextBtn.addEventListener("click", function(e){
+//////////////////////////////////////////////////
+// 次の写真
+//////////////////////////////////////////////////
+
+nextBtn.addEventListener("click", function (e) {
 
     e.stopPropagation();
 
     currentIndex++;
 
-    if(currentIndex >= currentPhotos.length){
+    if (currentIndex >= currentPhotos.length) {
 
         currentIndex = 0;
-
     }
 
     photo.src =
@@ -321,80 +373,131 @@ nextBtn.addEventListener("click", function(e){
 
 });
 
+//////////////////////////////////////////////////
+// 写真のスワイプ
+//////////////////////////////////////////////////
+
 let startX = 0;
 
-photo.addEventListener("touchstart", function(e){
+photo.addEventListener("touchstart", function (e) {
 
-    if(currentPhotos.length <= 1) return; // 写真1枚なら何もしない
+    if (currentPhotos.length <= 1) return;
 
     startX = e.touches[0].clientX;
 
 });
 
-photo.addEventListener("touchend", function(e){
+photo.addEventListener("touchend", function (e) {
 
-    if(currentPhotos.length <= 1) return;
+    if (currentPhotos.length <= 1) return;
 
     const endX = e.changedTouches[0].clientX;
 
     // 左にスワイプ → 次の写真
-    if(startX - endX > 50){
+    if (startX - endX > 50) {
 
         currentIndex++;
 
-        if(currentIndex >= currentPhotos.length){
+        if (currentIndex >= currentPhotos.length) {
+
             currentIndex = 0;
         }
 
-        photo.src = "/static/" + currentPhotos[currentIndex];
+        photo.src =
+            "/static/" + currentPhotos[currentIndex];
     }
 
     // 右にスワイプ → 前の写真
-    else if(endX - startX > 50){
+    else if (endX - startX > 50) {
 
         currentIndex--;
 
-        if(currentIndex < 0){
-            currentIndex = currentPhotos.length - 1;
+        if (currentIndex < 0) {
+
+            currentIndex =
+                currentPhotos.length - 1;
         }
 
-        photo.src = "/static/" + currentPhotos[currentIndex];
+        photo.src =
+            "/static/" + currentPhotos[currentIndex];
     }
-
 });
 
+//////////////////////////////////////////////////
+// 地図サイズ調整
+//////////////////////////////////////////////////
 
 function resizeCampusMap() {
+
     const baseWidth = 1080;
 
-    const mapArea = document.querySelector(".map-area");
-    const mapContainer = document.querySelector(".map-container");
+    const mapArea =
+        document.querySelector(".map-area");
+
+    const mapContainer =
+        document.querySelector(".map-container");
 
     if (!mapArea || !mapContainer) {
+
         return;
     }
 
-    const availableWidth = mapArea.clientWidth;
-    const scale = Math.min(availableWidth / baseWidth, 1);
+    const availableWidth =
+        mapArea.clientWidth;
 
-    mapContainer.style.transform = `scale(${scale})`;
+    const scale =
+        Math.min(availableWidth / baseWidth, 1);
+
+    mapContainer.style.transform =
+        `scale(${scale})`;
 
     // transformで縮小しても元の高さが残るため、高さを調整
     mapArea.style.height =
         `${mapContainer.offsetHeight * scale}px`;
 }
 
-window.addEventListener("load", resizeCampusMap);
-window.addEventListener("resize", resizeCampusMap);
+window.addEventListener(
+    "load",
+    resizeCampusMap
+);
 
+window.addEventListener(
+    "resize",
+    resizeCampusMap
+);
+
+//////////////////////////////////////////////////
+// 選択された建物のピンを強調
+//////////////////////////////////////////////////
 
 function highlightBuilding(buildingName) {
-    const pins = document.querySelectorAll(".building");
+
+    const pins =
+        document.querySelectorAll(".building");
 
     pins.forEach((pin) => {
+
         const isSelected =
             pin.dataset.buildingName === buildingName;
 
-        pin.classList.toggle("selected", isSelected);
+        pin.classList.toggle(
+            "selected",
+            isSelected
+        );
     });
+}
+
+//////////////////////////////////////////////////
+// ピンの強調を解除
+//////////////////////////////////////////////////
+
+function clearBuildingHighlight() {
+
+    document
+        .querySelectorAll(".building")
+        .forEach((pin) => {
+
+            pin.classList.remove("selected");
+
+        });
 }
