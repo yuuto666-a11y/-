@@ -386,3 +386,15 @@ function resizeCampusMap() {
 
 window.addEventListener("load", resizeCampusMap);
 window.addEventListener("resize", resizeCampusMap);
+
+
+function highlightBuilding(buildingName) {
+    const pins = document.querySelectorAll(".building");
+
+    pins.forEach((pin) => {
+        const isSelected =
+            pin.dataset.buildingName === buildingName;
+
+        pin.classList.toggle("selected", isSelected);
+    });
+}
