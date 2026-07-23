@@ -63,25 +63,44 @@ body{
         6px 12px 15px rgba(0,0,0,.35);
 
     transition:.2s;
-}　
+}
 
-
-#ピンの色変更
-/* 検索で選択された建物 */
+/* ピンの色変更 */
 .building.selected{
-    background-color: red;
-    color: white;
+    background:red;
+    color:white;
 
-    /* 元の位置調整を残しながら少し拡大 */
-    transform: translate(-50%, -50%) scale(1.3);
+    transform:
+        translate(-50%,-50%)
+        scale(1.3);
 
     box-shadow:
         0 0 0 4px white,
         0 0 15px red;
 
-    z-index: 100;
+    z-index:100;
 }
 
+.building:hover{
+    transform:translate(-50%,-55%);
+
+    box-shadow:
+        0 12px 0 #6a1b9a,
+        8px 18px 18px rgba(0,0,0,.45);
+}
+
+/* 選択されたピンにカーソルを乗せても赤色を維持 */
+.building.selected:hover{
+    background:red;
+
+    transform:
+        translate(-50%,-55%)
+        scale(1.3);
+
+    box-shadow:
+        0 0 0 4px white,
+        0 0 18px red;
+}
 .building:hover{
 
     transform:translate(-50%,-55%);
