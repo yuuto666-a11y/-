@@ -101,14 +101,6 @@ body{
         0 0 0 4px white,
         0 0 18px red;
 }
-.building:hover{
-
-    transform:translate(-50%,-55%);
-
-    box-shadow:
-        0 12px 0 #6a1b9a,
-        8px 18px 18px rgba(0,0,0,.45);
-}
 
 
 .container{
