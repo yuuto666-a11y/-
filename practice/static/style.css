@@ -181,11 +181,7 @@ body{
     padding:20px;
     
     font-size:18px; 
-}
-    
-      .slide-btn{
-        display:none;
-    }
+
 }
 
 
@@ -270,6 +266,10 @@ body{
         padding:20px;
 
         animation:slideUp .3s ease;
+    }
+
+     .slide-btn{
+        display:none;
     }
 }
 
